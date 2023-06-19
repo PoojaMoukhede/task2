@@ -86,123 +86,128 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
-    <script>
-        // Sample data for the chart
-        var dummyData = [
-            { interval: '12AM - 06AM', lineValue: 0, barValue: 0 },
-            { interval: "06AM - 08AM", lineValue: 11, barValue: 2 },
-            { interval: "08AM - 10AM", lineValue: 14, barValue: 16 },
-            { interval: "10AM - 12PM", lineValue: 12, barValue: 11 },
-            { interval: "12PM - 02PM", lineValue: 9, barValue: 5 },
-            { interval: "02PM - 04PM", lineValue: 0, barValue: 3 },
-            { interval: "04PM - 06PM", lineValue: 0, barValue: 0 },
-            { interval: "06PM - 08AM", lineValue: 0, barValue: 0 },
-            { interval: "08PM - 10PM", lineValue: 0, barValue: 0 },
-            { interval: "10PM - 12AM", lineValue: 0, barValue: 0 }
-        ]
+    <script >
 
 
-        // Format the seconds to hh:mm
-        function formatSecondsToTime(seconds) {
-            var date = new Date(null);
-            date.setSeconds(seconds);
-            return date.toISOString().substr(11, 8);
-        }
 
-        // Create the chart
-        var options = {
-            chart: {
-                type: 'line',
-                height: 350
-            },
-            series: [
-                {
-                    name: 'Avg time',
-                    type: 'line',
-                    data: dummyData.map(function (item) {
-                        return {
-                            x: item.interval,
-                            y: item.lineValue
-                        };
-                    }),
-                    color: '#626391',// line color
-                },
-                {
-                    name: 'Discharges by interval',
-                    type: 'bar',
-                    data: dummyData.map(function (item) {
-                        return {
-                            x: item.interval,
-                            y: item.barValue
-                        };
-                    }),
-                    color: '#f7c0c7', // bar color
-                   
+        fetch('./graph.json')
+                    .then(response => response.json())
+                    .then(data => {
+                       // JSON data here
+                       dummyData=data;
+
+                function formatSecondsToTime(seconds) {
+                    var date = new Date(null);
+                    date.setSeconds(seconds);
+                    return date.toISOString().substr(11, 8);
                 }
-            ],
-            xaxis: {
-                type: 'category',
-                labels: {
-                    rotate: -45
-                }
-            },
-            plotOptions: {
-                bar: {
-                    colors: {
-                        ranges: [{
-                            from: 0,
-                            to: 100,
-                        }],
-                        
+        
+                // Create the chart
+                var options = {
+                    chart: {
+                        type: 'line',
+                        height: 350
                     },
-                    dataLabels: {
-                        enabled: true,
-                        
-                        dropShadow: {
-                            enabled: true,
-                            left: 2,
-                            top: 2,
-                            opacity: 0.5
-                        }
-                      },
-                    borderWidth: 0,
-                    bordercolor: "none"
-                }
-            },
-            annotations: {
-                yaxis: [{
-                    y: 10,
-                    borderColor: '#00e396', // green color
-                    label: {
-                        borderColor: '#00e396', // green color
-                        style: {
-                            color: '#fff', // White color
-                            background: '#00e396' // green color
+                    series: [
+                        {
+                            name: 'Avg time',
+                            type: 'line',
+                            data: dummyData.map(function (item) {
+                                return {
+                                    x: item.interval,
+                                    y: item.lineValue
+                                };
+                            }),
+                            color: '#626391',// line color
                         },
-                        text: 'KPL : 02:00',
-                        position: 'right',
-                        offsetX: 5,
-                        offsetY: -5
+                        {
+                            name: 'Discharges by interval',
+                            type: 'bar',
+                            data: dummyData.map(function (item) {
+                                return {
+                                    x: item.interval,
+                                    y: item.barValue
+                                };
+                            }),
+                            color: '#f7c0c7', // bar color
+                           
+                        }
+                    ],
+                    xaxis: {
+                        type: 'category',
+                        labels: {
+                            rotate: -45
+                        }
                     },
-                    strokeDashArray: 5,
-                }]
-            },
-            stroke: {
-                show: true,
-                curve: 'smooth',
-                lineCap: 'butt',
-                colors: undefined,
-                width: 2,
-                dashArray: 0,
-            },dataLabels: {
-                enabled: true,
-              },
-
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    </script>
+                    plotOptions: {
+                        bar: {
+                            colors: {
+                                ranges: [{
+                                    from: 0,
+                                    to: 100,
+                                }],
+                                
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                
+                                dropShadow: {
+                                    enabled: true,
+                                    left: 2,
+                                    top: 2,
+                                    opacity: 0.5
+                                }
+                              },
+                            borderWidth: 0,
+                            bordercolor: "none"
+                        }
+                    },
+                    annotations: {
+                        yaxis: [{
+                            y: 10,
+                            borderColor: '#00e396', // green color
+                            label: {
+                                borderColor: '#00e396', // green color
+                                style: {
+                                    color: '#fff', // White color
+                                    background: '#00e396' // green color
+                                },
+                                text: 'KPL : 02:00',
+                                position: 'right',
+                                offsetX: 5,
+                                offsetY: -5
+                            },
+                            strokeDashArray: 5,
+                        }]
+                    },
+                    stroke: {
+                        show: true,
+                        curve: 'smooth',
+                        lineCap: 'butt',
+                        colors: undefined,
+                        width: 2,
+                        dashArray: 0,
+                    },dataLabels: {
+                        enabled: true,
+                      },
+        
+                };
+        
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+        
+                       
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+        
+        
+        
+        
+                
+                
+            </script>
 </body>
 
 </html>

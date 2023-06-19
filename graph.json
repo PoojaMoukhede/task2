@@ -1,12 +1,12 @@
 [
-    { "interval": "12AM - 06AM", "lineValue": 0, "barValue": 1 },
-    { "interval": "06AM - 08AM", "lineValue": 1, "barValue": 2 },
-    { "interval": "08AM - 10AM", "lineValue": 2, "barValue": 16 },
-    { "interval": "10AM - 12PM", "lineValue": 0, "barValue": 11 },
-    { "interval": "12PM - 02PM", "lineValue": 900, "barValue": 5 },
-    { "interval": "02PM - 04PM", "lineValue": 300, "barValue": 3 },
+    { "interval": "12AM - 06AM", "lineValue": 0, "barValue": 0 },
+    { "interval": "06AM - 08AM", "lineValue": 11, "barValue": 2 },
+    { "interval": "08AM - 10AM", "lineValue": 14, "barValue": 16 },
+    { "interval": "10AM - 12PM", "lineValue": 12, "barValue": 11 },
+    { "interval": "12PM - 02PM", "lineValue": 9, "barValue": 5 },
+    { "interval": "02PM - 04PM", "lineValue": 0, "barValue": 3 },
     { "interval": "04PM - 06PM", "lineValue": 0, "barValue": 0 },
-    { "interval": "06PM - 08AM", "lineValue": 900, "barValue": 0 },
-    { "interval": "08PM - 10PM", "lineValue": 300, "barValue": 0 },
-    { "interval": "10PM - 12AM", "lineValue": 300, "barValue": 0 }
+    { "interval": "06PM - 08AM", "lineValue": 0, "barValue": 0 },
+    { "interval": "08PM - 10PM", "lineValue": 0, "barValue": 0 },
+    { "interval": "10PM - 12AM", "lineValue": 0, "barValue": 0 }
 ]
