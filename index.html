@@ -27,7 +27,7 @@
             display: flex;
             column-gap: 5px;
             width: 99%;
-            height:42px;
+            height: 42px;
             margin-top: 0.5%;
             margin-left: 0.5%;
             margin-right: 0.5%;
@@ -41,7 +41,7 @@
             margin-top: 8px;
         }
 
-        .h31{
+        .h31 {
             margin-top: 8px;
         }
 
@@ -55,7 +55,24 @@
             width: 1100px;
             height: 400px;
         }
-        
+
+        .bar-value {
+            position: relative;
+        }
+
+        .bar-value:after {
+            content: attr(data-value);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
@@ -72,16 +89,16 @@
     <script>
         // Sample data for the chart
         var dummyData = [
-            { interval: '12AM - 06AM', lineValue: 0, barValue: 1 },
-            { interval: "06AM - 08AM", lineValue: 1, barValue: 2 },
-            { interval: "08AM - 10AM", lineValue: 2, barValue: 16 },
-            { interval: "10AM - 12PM", lineValue: 0, barValue: 11 },
-            { interval: "12PM - 02PM", lineValue: 900, barValue: 5 },
-            { interval: "02PM - 04PM", lineValue: 300, barValue: 3 },
+            { interval: '12AM - 06AM', lineValue: 0, barValue: 0 },
+            { interval: "06AM - 08AM", lineValue: 11, barValue: 2 },
+            { interval: "08AM - 10AM", lineValue: 14, barValue: 16 },
+            { interval: "10AM - 12PM", lineValue: 12, barValue: 11 },
+            { interval: "12PM - 02PM", lineValue: 9, barValue: 5 },
+            { interval: "02PM - 04PM", lineValue: 0, barValue: 3 },
             { interval: "04PM - 06PM", lineValue: 0, barValue: 0 },
-            { interval: "06PM - 08AM", lineValue: 900, barValue: 0 },
-            { interval: "08PM - 10PM", lineValue: 300, barValue: 0 },
-            { interval: "10PM - 12AM", lineValue: 300, barValue: 0 }
+            { interval: "06PM - 08AM", lineValue: 0, barValue: 0 },
+            { interval: "08PM - 10PM", lineValue: 0, barValue: 0 },
+            { interval: "10PM - 12AM", lineValue: 0, barValue: 0 }
         ]
 
 
@@ -119,7 +136,23 @@
                             y: item.barValue
                         };
                     }),
-                    color: '#f7c0c7' // Updated bar color
+                    color: '#f7c0c7', // Updated bar color
+                    extra: {
+                        dataLabels: {
+                            enabled: true,
+                            position: 'bottom', // Position the data labels at the bottom of the bars
+                            offsetX: 0,
+                            offsetY: 5,
+                            style: {
+                                fontSize: '12px',
+                                colors: ['#000000']
+                            },
+                            
+                            formatter: function (val) {
+                                return val;
+                            }
+                        }
+                    }
                 }
             ],
             xaxis: {
@@ -133,16 +166,27 @@
                     colors: {
                         ranges: [{
                             from: 0,
-                            to: 100000,
-                        }]
+                            to: 100,
+                        }],
+                        
                     },
+                    dataLabels: {
+                        enabled: true,
+                        
+                        dropShadow: {
+                            enabled: true,
+                            left: 2,
+                            top: 2,
+                            opacity: 0.5
+                        }
+                      },
                     borderWidth: 0,
                     bordercolor: "none"
                 }
             },
             annotations: {
                 yaxis: [{
-                    y: 650,
+                    y: 10,
                     borderColor: '#00e396', // green color
                     label: {
                         borderColor: '#00e396', // green color
@@ -157,21 +201,23 @@
                     },
                     strokeDashArray: 5,
                 }]
-            }
+            },
+            stroke: {
+                show: true,
+                curve: 'smooth',
+                lineCap: 'butt',
+                colors: undefined,
+                width: 2,
+                dashArray: 0,
+            },dataLabels: {
+                enabled: true,
+              },
+
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
-    <!-- <script>
-    function Func() {
-      fetch("graph.json")
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => console.log(data));
-    }
-  </script> -->
 </body>
 
 </html>
