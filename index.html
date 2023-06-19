@@ -1,157 +1,169 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Interval Line and Bar Chart</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">  <style>
-    body{
-        font-family: "Noto Sans";
-    }
-    .container {
-      display: flex;
-      border-radius: 5px;
-      margin: auto;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+    <title>Interval Line and Bar Chart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Noto Sans";
+        }
 
-    .header {
-        display: flex;
-        column-gap: 5px;
-        width: 99%;
-        margin-top: 0.5%;
-        margin-left: 0.5%;
-        margin-right: 0.5%;
-        border-radius: 5px;
-        border-left: 4px solid #ff6464;
-        background: linear-gradient(90deg, rgba(246,202,202,1) 22%, rgba(190,191,255,1) 100%);
-    }
-     
-    .h3{
-        margin-left: 2%;
-    }
+        .container {
+            display: flex;
+            border-radius: 5px;
+            margin: auto;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-    .icons {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 20px;
-    }
+        .header {
+            display: flex;
+            column-gap: 5px;
+            width: 99%;
+            height:42px;
+            margin-top: 0.5%;
+            margin-left: 0.5%;
+            margin-right: 0.5%;
+            border-radius: 5px;
+            border-left: 4px solid #ff6464;
+            background: linear-gradient(90deg, rgba(246, 202, 202, 1) 22%, rgba(190, 191, 255, 1) 100%);
+        }
 
-    .chart-container {
-      width: 1100px;
-      height: 400px;
-    }
-  </style>
+        .h3 {
+            margin-left: 2%;
+            margin-top: 8px;
+        }
+
+        .h31{
+            margin-top: 8px;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            width: 1100px;
+            height: 400px;
+        }
+        
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="header">
-        <H3 class="h3" style="color: #ff6464;">Dischrages</H3><H3 style="color: #010254;">Now</H3>
+    <div class="container">
+        <div class="header">
+            <H3 class="h3" style="color: #ff6464;">Dischrages</H3>
+            <H3 class="h31" style="color: #010254;">Now</H3>
+        </div>
+        <div class="chart-container" id="chart"></div>
     </div>
-    <div class="chart-container" id="chart"></div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
-  <script>
-    // Sample data for the chart
-    var dummyData = [
-    { interval: '12AM - 06AM', lineValue: 0, barValue: 1 },
-    { interval: "06AM - 08AM", lineValue: 1, barValue: 2 },
-    { interval: "08AM - 10AM", lineValue: 2, barValue: 16 },
-    { interval: "10AM - 12PM", lineValue: 0, barValue: 11 },
-    { interval: "12PM - 02PM", lineValue: 900, barValue: 5 },
-    { interval: "02PM - 04PM", lineValue: 300, barValue: 3 },
-    { interval: "04PM - 06PM", lineValue: 0, barValue: 0 },
-    { interval: "06PM - 08AM", lineValue: 900, barValue: 0 },
-    { interval: "08PM - 10PM", lineValue: 300, barValue: 0 },
-    { interval: "10PM - 12AM", lineValue: 300, barValue: 0 }
-]
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
+    <script>
+        // Sample data for the chart
+        var dummyData = [
+            { interval: '12AM - 06AM', lineValue: 0, barValue: 1 },
+            { interval: "06AM - 08AM", lineValue: 1, barValue: 2 },
+            { interval: "08AM - 10AM", lineValue: 2, barValue: 16 },
+            { interval: "10AM - 12PM", lineValue: 0, barValue: 11 },
+            { interval: "12PM - 02PM", lineValue: 900, barValue: 5 },
+            { interval: "02PM - 04PM", lineValue: 300, barValue: 3 },
+            { interval: "04PM - 06PM", lineValue: 0, barValue: 0 },
+            { interval: "06PM - 08AM", lineValue: 900, barValue: 0 },
+            { interval: "08PM - 10PM", lineValue: 300, barValue: 0 },
+            { interval: "10PM - 12AM", lineValue: 300, barValue: 0 }
+        ]
 
 
-    // Format the seconds to hh:mm
-    function formatSecondsToTime(seconds) {
-      var date = new Date(null);
-      date.setSeconds(seconds);
-      return date.toISOString().substr(11, 8);
-    }
-
-    // Create the chart
-    var options = {
-      chart: {
-        type: 'line',
-        height: 350
-      },
-      series: [
-        {
-          name: 'Avg time',
-          type: 'line',
-          data: dummyData.map(function (item) {
-            return {
-              x: item.interval,
-              y: item.lineValue
-            };
-          }),
-          color: '#626391' ,// Updated line color
-        },
-        {
-          name: 'Discharges by interval',
-          type: 'bar',
-          data: dummyData.map(function (item) {
-            return {
-              x: item.interval,
-              y: item.barValue
-            };
-          }),
-          color: '#f7c0c7' // Updated bar color
+        // Format the seconds to hh:mm
+        function formatSecondsToTime(seconds) {
+            var date = new Date(null);
+            date.setSeconds(seconds);
+            return date.toISOString().substr(11, 8);
         }
-      ],
-      xaxis: {
-        type: 'category',
-        labels: {
-          rotate: -45
-        }
-      },
-      plotOptions: {
-        bar: {
-          colors: {
-            ranges: [{
-              from: 0,
-              to: 100000,
-            }]
-          },
-          borderWidth: 0,
-          bordercolor: "none"
-        }
-      },
-      annotations: {
-        yaxis: [{
-          y: 650, // KPL = 02:00 (in milliseconds)
-          borderColor: '#00e396', // Red color
-          label: {
-            borderColor: '#00e396', // Red color
-            style: {
-              color: '#fff', // White color
-              background: '#00e396' // Red color
+
+        // Create the chart
+        var options = {
+            chart: {
+                type: 'line',
+                height: 350
             },
-            text: 'KPL : 02:00',
-            position: 'right',
-            offsetX: 5,
-            offsetY: -5
-          },
-          strokeDashArray: 5,
-        }]
-      }
-    };
+            series: [
+                {
+                    name: 'Avg time',
+                    type: 'line',
+                    data: dummyData.map(function (item) {
+                        return {
+                            x: item.interval,
+                            y: item.lineValue
+                        };
+                    }),
+                    color: '#626391',// Updated line color
+                },
+                {
+                    name: 'Discharges by interval',
+                    type: 'bar',
+                    data: dummyData.map(function (item) {
+                        return {
+                            x: item.interval,
+                            y: item.barValue
+                        };
+                    }),
+                    color: '#f7c0c7' // Updated bar color
+                }
+            ],
+            xaxis: {
+                type: 'category',
+                labels: {
+                    rotate: -45
+                }
+            },
+            plotOptions: {
+                bar: {
+                    colors: {
+                        ranges: [{
+                            from: 0,
+                            to: 100000,
+                        }]
+                    },
+                    borderWidth: 0,
+                    bordercolor: "none"
+                }
+            },
+            annotations: {
+                yaxis: [{
+                    y: 650,
+                    borderColor: '#00e396', // green color
+                    label: {
+                        borderColor: '#00e396', // green color
+                        style: {
+                            color: '#fff', // White color
+                            background: '#00e396' // green color
+                        },
+                        text: 'KPL : 02:00',
+                        position: 'right',
+                        offsetX: 5,
+                        offsetY: -5
+                    },
+                    strokeDashArray: 5,
+                }]
+            }
+        };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-  </script>
-  <!-- <script>
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+    <!-- <script>
     function Func() {
       fetch("graph.json")
         .then((res) => {
@@ -161,4 +173,5 @@
     }
   </script> -->
 </body>
+
 </html>
