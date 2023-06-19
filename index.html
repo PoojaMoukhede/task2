@@ -125,7 +125,7 @@
                             y: item.lineValue
                         };
                     }),
-                    color: '#626391',// Updated line color
+                    color: '#626391',// line color
                 },
                 {
                     name: 'Discharges by interval',
@@ -136,23 +136,8 @@
                             y: item.barValue
                         };
                     }),
-                    color: '#f7c0c7', // Updated bar color
-                    extra: {
-                        dataLabels: {
-                            enabled: true,
-                            position: 'bottom', // Position the data labels at the bottom of the bars
-                            offsetX: 0,
-                            offsetY: 5,
-                            style: {
-                                fontSize: '12px',
-                                colors: ['#000000']
-                            },
-                            
-                            formatter: function (val) {
-                                return val;
-                            }
-                        }
-                    }
+                    color: '#f7c0c7', // bar color
+                   
                 }
             ],
             xaxis: {
